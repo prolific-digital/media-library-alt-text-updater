@@ -22,6 +22,7 @@ This plugin will display the alt text for images on the frontend, but you will n
 
 - **Automatic Alt Text Update:** Automatically updates image block alt text in posts and pages.
 - **Media Library Integration:** Uses alt text from the media library.
+- **Multisite Support:** Supports multisite networks, including those using a single media library for site ID 1.
 - **Missing Alt Text Targeting:** Targets images that are missing alt text.
 - **Accessibility and SEO Improvement:** Improves website accessibility and SEO.
 - **Editor Override:** Allows for manual override of alt text on an image-by-image basis within the WordPress editor.
@@ -40,7 +41,7 @@ Once the plugin is activated, it will automatically update the alt text for imag
 
 ### Does this plugin update existing image blocks?
 
-Yes, the plugin updates existing image blocks in your posts, page, or custom psot type to ensure they have alt text from the media library.
+Yes, the plugin updates existing image blocks in your posts, pages, or custom post types to ensure they have alt text from the media library.
 
 ### What happens if an image in the media library does not have alt text?
 
