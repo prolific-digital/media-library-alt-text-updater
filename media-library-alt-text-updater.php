@@ -1,19 +1,45 @@
-
 <?php
 /**
- * Plugin Name: Media Library Alt Text Updater
- * Plugin URI: https://prolificdigital.com
- * Description: A standalone plugin that updates image block alt text in posts and pages with the corresponding alt text from the media library. This plugin targets images that are missing alt text and ensures all images have descriptive alt text for better accessibility and SEO.
- * Version: 1.0.1
- * Author: Prolific Digital
- * Author URI: https://prolificdigital.com
- * License: GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: media-library-alt-text-updater
- * Domain Path: /languages
- * Requires at least: 5.7
- * Requires PHP: 7.3
+ * Plugin Name:       Media Library Alt Text Updater
+ * Plugin URI:        https://prolificdigital.com
+ * Description:       Updates image block alt text in posts and pages with the alt text from the Media Library.
+ * Version:           1.1.0
+ * Requires at least: 6.5
+ * Requires PHP:      8.4
+ * Author:            Prolific Digital
+ * Author URI:        https://prolificdigital.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       media-library-alt-text-updater
+ * Domain Path:       /languages
+ * Update URI:        https://api.prolificdigital.io/api/update?plugin=media-library-alt-text-updater
+ *
+ * @package MediaLibraryAltTextUpdater
  */
+
+defined( 'ABSPATH' ) || exit;
+
+define( 'MEDIA_LIBRARY_ALT_TEXT_UPDATER_VERSION', '1.1.0' );
+define( 'MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_FILE', __FILE__ );
+define( 'MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+// Composer dependencies (plugin-update-checker). Present in release zips;
+// in a git checkout run `composer install` first.
+if ( is_readable( MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'vendor/autoload.php';
+}
+
+require_once MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'includes/update-checker.php';
+
+/**
+ * Load bundled translations from /languages (the header's Domain Path).
+ */
+add_action(
+	'init',
+	static function () {
+		load_plugin_textdomain( 'media-library-alt-text-updater', false, dirname( plugin_basename( MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_FILE ) ) . '/languages' );
+	}
+);
 
 // Hook into the 'render_block' filter to modify the block content before rendering
 add_filter('render_block', 'media_library_alt_text_updater', 10, 2);
