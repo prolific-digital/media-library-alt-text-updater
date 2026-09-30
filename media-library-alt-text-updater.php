@@ -15,6 +15,17 @@
  * Requires PHP: 7.3
  */
 
+define( 'MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_FILE', __FILE__ );
+define( 'MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+// Composer dependencies (plugin-update-checker). Present in release zips;
+// in a git checkout run `composer install` first.
+if ( is_readable( MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'vendor/autoload.php';
+}
+
+require_once MEDIA_LIBRARY_ALT_TEXT_UPDATER_PLUGIN_DIR . 'includes/update-checker.php';
+
 // Hook into the 'render_block' filter to modify the block content before rendering
 add_filter('render_block', 'media_library_alt_text_updater', 10, 2);
 
